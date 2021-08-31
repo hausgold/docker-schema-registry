@@ -1,5 +1,6 @@
 ![mDNS enabled confluentinc/cp-schema-registry](https://raw.githubusercontent.com/hausgold/docker-schema-registry/master/docs/assets/project.png)
 
+[![Continuous Integration](https://github.com/hausgold/docker-schema-registry/actions/workflows/package.yml/badge.svg?branch=master)](https://github.com/hausgold/docker-schema-registry/actions/workflows/package.yml)
 [![Source Code](https://img.shields.io/badge/source-on%20github-blue.svg)](https://github.com/hausgold/docker-schema-registry)
 [![Docker Image](https://img.shields.io/badge/image-on%20docker%20hub-blue.svg)](https://hub.docker.com/r/hausgold/schema-registry/)
 

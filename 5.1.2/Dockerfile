@@ -6,7 +6,7 @@ ENV MDNS_HOSTNAME=schema-registry.local
 
 # Install system packages
 RUN apt-get update -yqqq && \
-  apt-get install -y \
+  apt-get install -y --force-yes \
     dbus avahi-daemon avahi-utils libnss-mdns nginx supervisor
 
 # Copy avahi.sh
