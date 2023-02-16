@@ -9,13 +9,9 @@ RUN apt-get update -yqqq && \
   apt-get install -y --force-yes \
     dbus avahi-daemon avahi-utils libnss-mdns nginx supervisor
 
-# Copy avahi.sh
-COPY config/avahi.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/avahi.sh
-
-# Copy schema-registry.sh
-COPY config/schema-registry.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/schema-registry.sh
+# Copy custom scripts
+COPY config/*.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
 
 # Configure nginx
 COPY config/nginx/default /etc/nginx/sites-enabled/default
