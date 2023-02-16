@@ -8,8 +8,9 @@
 sed -i 's/ systemd//g' /etc/nsswitch.conf
 
 # Prepare the environment for dbus
-rm -rf /var/run/dbus/pid
-mkdir -p /var/run/dbus/
+rm -rf /var/run/dbus /run/dbus
+mkdir -p /var/run/dbus/ /run/dbus
+chmod ugo+rwx /var/run/dbus/ /run/dbus
 
 # systemd service activation makes no sense on a non-systemd system.
 # Looks like this is not needed currently/anymore.
