@@ -4,6 +4,14 @@ MAINTAINER Hermann Mayer "hermann.mayer@hausgold.de"
 # You can change this environment variable on run's with -e
 ENV MDNS_HOSTNAME=schema-registry.local
 
+# Update the apt sources list
+RUN echo 'deb http://archive.debian.org/debian jessie main\n\
+deb http://archive.debian.org/debian-security jessie/updates main\n\
+deb http://archive.debian.org/debian jessie-backports main' \
+  >/etc/apt/sources.list; \
+  echo 'Acquire::Check-Valid-Until "0";' \
+  > /etc/apt/apt.conf.d/10no-check-valid-until
+
 # Install system packages
 RUN apt-get update -yqqq && \
   apt-get install -y --force-yes \
