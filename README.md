@@ -28,7 +28,7 @@ To get a [Schema Registry](https://github.com/confluentinc/schema-registry) serv
 
 ```yaml
 zookeeper:
-  image: wurstmeister/zookeeper
+  image: hausgold/zookeeper
   ports:
     - "2181"
 kafka:
