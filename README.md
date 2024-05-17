@@ -23,35 +23,38 @@ while it is accessible by default as *schema-registry.local*. (Port 80)
 
 ## Getting starting
 
-To get a [Schema Registry](https://github.com/confluentinc/schema-registry) service up and running create a
-`docker-compose.yml` and insert the following snippet:
+To get a [Schema Registry](https://github.com/confluentinc/schema-registry)
+service up and running create a `docker-compose.yml` and insert the following
+snippet:
 
 ```yaml
-zookeeper:
-  image: hausgold/zookeeper
-  ports:
-    - "2181"
-kafka:
-  image: hausgold/kafka
-  environment:
-    # Mind the .local suffix
-    - MDNS_HOSTNAME=kafka.local
-  ports:
-    # The ports are just for you to know when configure your
-    # container links, on depended containers
-    - "9092"
-  links:
-    # Link to the ZooKeeper instance for advertising
-    - zookeeper
-schema-registry:
-  image: hausgold/schema-registry
-  environment:
-    # Mind the .local suffix
-    MDNS_HOSTNAME: schema-registry.local
-    # Defaults to zookeeper:2181
-    SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
-  links:
-    - zookeeper
+version: "3"
+services:
+  kafka:
+    image: hausgold/kafka
+    environment:
+      # Mind the .local suffix
+      - MDNS_HOSTNAME=kafka.local
+    ports:
+      # The ports are just for you to know when configure your
+      # container links, on depended containers
+      - "9092"
+
+  schema-registry:
+    image: hausgold/schema-registry
+    environment:
+      # Mind the .local suffix
+      MDNS_HOSTNAME: schema-registry.local
+      # Defaults to http://0.0.0.0:80
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:80
+      # Defaults to kafka.local:9092
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+      # The ports are just for you to know when configure your
+      # container links, on depended containers
+      - "80"
+    links:
+      - kafka
 ```
 
 Afterwards start the service with the following command:

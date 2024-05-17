@@ -1,0 +1,5 @@
+[centos-baseos]
+name=CentOS Linux $releasever - BaseOS
+baseurl=http://vault.centos.org/centos/$releasever/BaseOS/$basearch/os/
+enabled=1
+gpgcheck=0
