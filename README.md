@@ -45,16 +45,29 @@ services:
     environment:
       # Mind the .local suffix
       MDNS_HOSTNAME: schema-registry.local
-      # Defaults to http://0.0.0.0:80
-      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:80
+      # Defaults to http://0.0.0.0:8081
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
       # Defaults to kafka.local:9092
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+      # Set the default Apache Avro schema compatibility
+      #
+      # See: http://bit.ly/2TcpoY1
+      # See: http://bit.ly/2Hfo4wj
+      SCHEMA_REGISTRY_AVRO_COMPATIBILITY_LEVEL: full
     ports:
       # The ports are just for you to know when configure your
       # container links, on depended containers
-      - "80"
+      - "80" # CORS-enabled nginx proxy to the schema-registry
+      - "8081" # direct access to the schema-registry (no CORS)
     links:
       - kafka
+
+  schema-registry-ui:
+    image: hausgold/schema-registry-ui:0.9.5
+    network_mode: bridge
+    environment:
+      MDNS_HOSTNAME: schema-registry-ui.local
+      SCHEMAREGISTRY_URL: http://schema-registry.local
 ```
 
 Afterwards start the service with the following command:

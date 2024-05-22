@@ -23,4 +23,4 @@ update: $(UPDATE_TAGS)
 $(UPDATE_TAGS): TAG=$(@:update-%=%)
 $(UPDATE_TAGS):
 	# Update the configuration for the "$(TAG)" image tag directory
-	@$(CP) -ar config/* $(TAG)/config/
+	@$(CP) -ar build/* $(TAG)/build/
