@@ -1,5 +1,5 @@
 FROM confluentinc/cp-schema-registry:7.6.1
-MAINTAINER Hermann Mayer "hermann.mayer@hausgold.de"
+LABEL org.opencontainers.image.authors="containers@hausgold.de"
 
 # You can change this environment variable on run's with -e
 ENV MDNS_HOSTNAME=schema-registry.local
@@ -16,4 +16,4 @@ RUN \
 ENTRYPOINT []
 
 # Define the command to run per default
-CMD /usr/bin/supervisord -nc /etc/supervisord.conf
+CMD ["/usr/bin/supervisord", "-nc", "/etc/supervisord.conf"]
