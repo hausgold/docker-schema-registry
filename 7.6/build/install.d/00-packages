@@ -21,7 +21,7 @@ EOF
 # to Python version downgrade.
 dnf install -y \
   "${EPEL}/epel-release-latest-8.noarch.rpm" \
-  "${EPEL}/9/Everything/x86_64/Packages/s/supervisor-4.2.2-3.el9.noarch.rpm"
+  "${EPEL}/9/Everything/x86_64/Packages/s/supervisor-4.2.5-6.el9.noarch.rpm"
 
 microdnf install hostname dbus avahi nss-mdns
 microdnf clean all
