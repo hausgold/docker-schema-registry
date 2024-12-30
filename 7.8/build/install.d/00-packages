@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Any non-zero exit code will break
+set -e
+
+# Configure some settings
+EPEL='https://dl.fedoraproject.org/pub/epel'
+
+# Install the CentOS 8 BaseOS repositories for the mDNS stack
+cat >/etc/yum.repos.d/extra.repo <<'EOF'
+[centos-baseos]
+name=CentOS Linux $releasever - BaseOS
+baseurl=http://vault.centos.org/centos/$releasever/BaseOS/$basearch/os/
+enabled=1
+gpgcheck=0
+EOF
+
+# Install EPEL and supervisord from EL9 sources, even this image is based on
+# EL8. Confluent Inc, ships a newer Python for their in-container utilities.
+# When installing supervisord from EL8 sources this breaks this utilities due
+# to Python version downgrade.
+dnf install -y \
+  "${EPEL}/epel-release-latest-8.noarch.rpm" \
+  "${EPEL}/9/Everything/x86_64/Packages/s/supervisor-4.2.5-6.el9.noarch.rpm"
+
+microdnf install hostname dbus avahi nss-mdns
+microdnf clean all

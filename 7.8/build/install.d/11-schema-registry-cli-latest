@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# Install schema-registry-cli utility
+# See: https://bit.ly/3MAF7cP
+
+# Any non-zero exit code will break
+set -e
+
+# Install the Rust toolchain
+dnf install -y gcc
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+  | sh -s -- -y --default-toolchain=1.78.0
+source "${HOME}/.cargo/env"
+
+# Install the schema-registry-cli utility
+cargo install schema-registry-cli@~2
+mv "${HOME}/.cargo/bin/schema-registry-cli" /usr/bin/schema-registry-cli
+
+# Remove the Rust toolchain again
+rustup self uninstall -y
+dnf autoremove -y gcc

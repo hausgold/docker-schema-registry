@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# @author Hermann Mayer <hermann.mayer92@gmail.com>
+
+# Set non-default bash options
+shopt -s globstar
+
+# Setup some environment variables
+export DEBIAN_FRONTEND='noninteractive'
+export MAKEFLAGS="-j$(nproc)"
+
+# Check the given argument/build stage
+if [[ -z "${1}" || ! "${1}" =~ ^(install)$ ]]; then
+  echo "${0}: Unknown build stage. Available build stages: install"
+  exit 1
+else
+  BUILD_STAGE="${1}"
+fi
+
+# Any non-zero exit code will break
+set -e
+
+# Get the full path of the current file, no matter where it being called from,
+# and go to that directory
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; cd "${DIR}"
+
+# Install essential packages for this script
+microdnf install -y findutils
+
+# Run the build stage parts (order can be adjusted with left-padded numbering)
+for FILE in $(find "${BUILD_STAGE}.d" -maxdepth 1 -type f | sort -n); do
+  echo "> Run ${FILE} .."
+  source "${FILE}"
+done
