@@ -9,7 +9,7 @@ set -e
 # Install the Rust toolchain
 dnf install -y gcc
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
-  | sh -s -- -y --default-toolchain=1.78.0
+  | sh -s -- -y --default-toolchain=1.85.0
 source "${HOME}/.cargo/env"
 
 # Install the schema-registry-cli utility
