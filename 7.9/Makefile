@@ -10,7 +10,7 @@ SHELL := bash
 REGISTRY ?=
 CANONICAL_NAME ?= schema-registry
 IMAGE_NAME ?= hausgold/$(CANONICAL_NAME)
-IMAGE_REF ?= 7.6
+IMAGE_REF ?= 7.9
 IMAGE_URI := $(IMAGE_NAME):$(IMAGE_REF)
 
 # Host binaries
