@@ -7,7 +7,7 @@ ENV MDNS_HOSTNAME=schema-registry.local
 # Switch to the root user
 USER root
 
-# Build stage 1 - installation of the mDNS stack, utilites, etc
+# Build stage 1 - installation of the mDNS stack, utilities, etc
 RUN \
   --mount=type=bind,readwrite,source=build,target=/build \
   /build/run install
