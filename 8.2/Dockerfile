@@ -1,4 +1,4 @@
-FROM confluentinc/cp-schema-registry:7.8.7
+FROM confluentinc/cp-schema-registry:8.2.0
 LABEL org.opencontainers.image.authors="containers@hausgold.de"
 
 # You can change this environment variable on run's with -e

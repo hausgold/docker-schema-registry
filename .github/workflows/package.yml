@@ -20,6 +20,9 @@ jobs:
       matrix:
         version:
           - latest
+          - '8.2'
+          - '8.1'
+          - '8.0'
           - '7.9'
           - '7.8'
     steps:
