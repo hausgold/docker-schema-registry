@@ -11,5 +11,5 @@ EPEL='https://dl.fedoraproject.org/pub/epel'
 dnf install -y \
   "${EPEL}/epel-release-latest-9.noarch.rpm"
 
-microdnf install -y supervisor hostname dbus avahi nss-mdns
+microdnf install -y supervisor hostname dbus-daemon avahi nss-mdns
 microdnf clean all
